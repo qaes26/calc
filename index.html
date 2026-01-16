@@ -3,24 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>أسئلة مراجعة في المحاسبة (ص 41 - 147)</title>
+    <title>أسئلة محاسبة تفاعلية (ص 41 - 147)</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f4f7f6;
+            background-color: #f0f2f5;
             color: #333;
-            line-height: 1.6;
             margin: 0;
             padding: 20px;
+            line-height: 1.6;
         }
         .container {
-            max-width: 900px;
+            max-width: 800px;
             margin: 0 auto;
             background-color: #fff;
             padding: 40px;
             border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            border-top: 5px solid #2c3e50;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-top: 6px solid #2c3e50;
         }
         header {
             text-align: center;
@@ -36,53 +36,106 @@
             color: #7f8c8d;
             font-size: 1.1em;
         }
-        .author-box {
-            background-color: #2c3e50;
+        .author-badge {
+            background-color: #3498db;
             color: #fff;
-            padding: 10px 20px;
-            border-radius: 50px;
+            padding: 8px 20px;
+            border-radius: 20px;
             display: inline-block;
             margin-top: 15px;
             font-weight: bold;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            font-size: 0.9em;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
-        .section-title {
-            background-color: #ecf0f1;
-            padding: 10px 15px;
-            border-right: 5px solid #3498db;
-            color: #2c3e50;
-            margin-top: 30px;
-            margin-bottom: 20px;
-            font-size: 1.3em;
-            font-weight: bold;
-        }
-        .question-list {
-            list-style-type: none;
-            padding: 0;
-            counter-reset: question-counter;
-        }
-        .question-item {
+        .question-card {
             background-color: #fff;
             border: 1px solid #e1e1e1;
-            margin-bottom: 15px;
-            padding: 15px 20px 15px 15px;
-            border-radius: 8px;
-            position: relative;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
             transition: transform 0.2s;
-            display: flex;
-            align-items: baseline;
         }
-        .question-item:hover {
-            transform: translateX(-5px);
+        .question-card:hover {
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+        }
+        .question-text {
+            font-size: 1.15em;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+        .options {
+            list-style-type: none;
+            padding: 0;
+        }
+        .option-item {
+            margin-bottom: 10px;
+        }
+        .option-label {
+            display: block;
+            padding: 12px 15px;
+            background-color: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .option-label:hover {
+            background-color: #e2e6ea;
+            border-color: #adb5bd;
+        }
+        input[type="radio"] {
+            display: none;
+        }
+        input[type="radio"]:checked + .option-label {
             border-color: #3498db;
-        }
-        .question-item::before {
-            counter-increment: question-counter;
-            content: counter(question-counter) ".";
-            color: #3498db;
+            background-color: #eaf6ff;
+            color: #2980b9;
             font-weight: bold;
-            margin-left: 10px;
-            min-width: 25px;
+        }
+        .feedback {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            display: none;
+            font-weight: bold;
+        }
+        .correct {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .incorrect {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .controls {
+            text-align: center;
+            margin-top: 30px;
+        }
+        .btn {
+            background-color: #2c3e50;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 1.1em;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .btn:hover {
+            background-color: #34495e;
+        }
+        .score-box {
+            text-align: center;
+            font-size: 1.5em;
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: #ecf0f1;
+            border-radius: 10px;
+            display: none;
+            border: 2px solid #bdc3c7;
         }
         footer {
             text-align: center;
@@ -98,83 +151,373 @@
 
 <div class="container">
     <header>
-        <h1>بنك أسئلة المحاسبة المالية</h1>
-        <div class="subtitle">تغطية شاملة للمادة من صفحة 41 إلى 147</div>
-        <div class="author-box">من إعداد: قيس جازي</div>
+        <h1>بنك الأسئلة الشامل (اختيار من متعدد)</h1>
+        <div class="subtitle">مراجعة المحاسبة 1 (الصفحات 41 - 147)</div>
+        <div class="author-badge">من إعداد: قيس جازي</div>
     </header>
 
-    <div class="section-title">الفصل الثاني: تحليل العمليات المالية</div>
-    <ul class="question-list">
-        <li class="question-item">عرف العملية المالية، وما هو الشرط الأساسي لكي يقوم المحاسب بتحليلها وتسجيلها؟</li>
-        <li class="question-item">ما الفرق بين الحسابات الحقيقية والحسابات الاسمية؟ أعط مثالاً على كل نوع.</li>
-        <li class="question-item">كيف تصنف الحسابات وفقاً لمعادلة الميزانية (التصنيف الخماسي)؟</li>
-        <li class="question-item">اذكر نص معادلة الميزانية الأساسية.</li>
-        <li class="question-item">ما هو أثر عملية "شراء سيارة نقداً" على معادلة الميزانية؟</li>
-        <li class="question-item">ما هو أثر عملية "شراء بضاعة على الحساب" على الأصول والالتزامات؟</li>
-        <li class="question-item">وفقاً لقاعدة المدين والدائن، متى تكون حسابات الأصول مدينة ومتى تكون دائنة؟</li>
-        <li class="question-item">وفقاً لقاعدة المدين والدائن، ما هي طبيعة حسابات حقوق الملكية والإيرادات عند الزيادة؟</li>
-        <li class="question-item">ما الفرق بين الموجودات الملموسة والموجودات غير الملموسة؟</li>
-        <li class="question-item">لماذا سميت الحسابات الاسمية بهذا الاسم؟</li>
-        <li class="question-item">ما هو دليل الحسابات (Chart of Accounts) وما الفائدة منه؟</li>
-        <li class="question-item">حلل العملية التالية: "بدأ المشروع أعماله برأسمال 20,000 دينار أودع في الصندوق".</li>
-        <li class="question-item">حلل العملية التالية: "دفع مصروف رواتب الموظفين نقداً".</li>
-        <li class="question-item">ما هو الأثر المحاسبي لسداد التزام (دين) نقداً على معادلة الميزانية؟</li>
-        <li class="question-item">هل تعتبر العمليات الإدارية (مثل تعيين موظف دون دفع راتب) عمليات مالية؟ ولماذا؟</li>
-    </ul>
+    <div id="score-display" class="score-box"></div>
 
-    <div class="section-title">الفصل الثالث: تسجيل العمليات المالية</div>
-    <ul class="question-list">
-        <li class="question-item">ما هي مصادر القيود المحاسبية؟ وما الفرق بين المصادر المباشرة وغير المباشرة؟</li>
-        <li class="question-item">عرف "الإشعار المدين" و"الإشعار الدائن" والفرق بينهما.</li>
-        <li class="question-item">ما هي الأوراق التجارية؟ اذكر ثلاثة أمثلة عليها.</li>
-        <li class="question-item">ما هو الفرق بين الشيك والكمبيالة؟</li>
-        <li class="question-item">عدد خطوات الدورة المحاسبية بالترتيب.</li>
-        <li class="question-item">اشرح مبدأ نظام القيد المزدوج.</li>
-        <li class="question-item">ما هو القيد البسيط؟ أعط مثالاً عليه.</li>
-        <li class="question-item">ما هو القيد المركب؟ وما هي أنواعه الثلاثة؟</li>
-        <li class="question-item">سجل قيد اليومية للعملية التالية: "شراء أثاث بقيمة 5000 دينار، دفع نصفها نقداً والباقي بشيك".</li>
-        <li class="question-item">سجل قيد اليومية للعملية التالية: "بيع بضاعة على الحساب لشركة النور بقيمة 2000 دينار".</li>
-        <li class="question-item">ما هو الحساب الذي يمثل النقدية في البنك، والحساب الذي يمثل النقدية في الخزينة؟</li>
-        <li class="question-item">متى نستخدم حساب "المشتريات" ومتى نستخدم حساب "المبيعات" في القيود؟</li>
-        <li class="question-item">سجل قيد سداد مصروف الإيجار نقداً.</li>
-        <li class="question-item">ما هو مستند القيد (Entry Voucher) ومتى يستخدم؟</li>
-    </ul>
+    <form id="quiz-form">
+        <div id="questions-container"></div>
 
-    <div class="section-title">الفصل الرابع: الدفاتر المحاسبية</div>
-    <ul class="question-list">
-        <li class="question-item">ما هي الدفاتر المحاسبية الإلزامية التي نص عليها القانون الأردني؟</li>
-        <li class="question-item">ما هي الشروط القانونية الواجب توفرها في الدفاتر التجارية الإلزامية؟</li>
-        <li class="question-item">عرف دفتر اليومية العام، وما هي الخانات التي يتضمنها؟</li>
-        <li class="question-item">ما هو دفتر الأستاذ العام؟ وما علاقته بدفتر اليومية؟</li>
-        <li class="question-item">ما المقصود بعملية "الترحيل" (Posting)؟</li>
-        <li class="question-item">اشرح خطوات عملية "الترصيد" (Balancing) للحسابات.</li>
-        <li class="question-item">متى يكون رصيد الحساب مديناً؟ ومتى يكون دائناً؟</li>
-        <li class="question-item">ماذا يعني أن الحساب "مقفل" أو "مرصد"؟</li>
-        <li class="question-item">ما المقصود بعملية "إعادة فتح الحساب"؟</li>
-        <li class="question-item">ما هو دفتر الأستاذ ذو الرصيد المتحرك (أربعة أعمدة)؟ وما ميزته؟</li>
-        <li class="question-item">إذا كان مجموع الجانب المدين لحساب الصندوق 5000 ومجموع الجانب الدائن 3000، فما هو الرصيد وما نوعه؟</li>
-        <li class="question-item">ما هي المدة القانونية للاحتفاظ بالدفاتر التجارية وفق القانون الأردني؟</li>
-        <li class="question-item">ما الهدف من إمساك "دفتر صور الرسائل"؟</li>
-    </ul>
-
-    <div class="section-title">الفصل الخامس: العمليات التمويلية والرأسمالية</div>
-    <ul class="question-list">
-        <li class="question-item">ما هي الصور المختلفة لإيداع رأس المال في بداية حياة المشروع؟</li>
-        <li class="question-item">سجل القيد المحاسبي لبدء نشاط تجاري بتقديم: نقدية 10,000، سيارات 5,000، وبضاعة 7,000.</li>
-        <li class="question-item">كيف تتم معالجة زيادة رأس المال خلال حياة المشروع؟</li>
-        <li class="question-item">سجل قيد زيادة رأس المال عن طريق تقديم مبنى بقيمة 40,000 دينار.</li>
-        <li class="question-item">ما هي الحالات التي يتم فيها تخفيض رأس المال؟</li>
-        <li class="question-item">سجل قيد تخفيض رأس المال بمبلغ 5000 دينار نقداً.</li>
-        <li class="question-item">ما المقصود بالمسحوبات الشخصية؟ وكيف تؤثر على حقوق الملكية؟</li>
-        <li class="question-item">كيف تعالج المسحوبات الشخصية إذا كانت على شكل بضاعة (بسعر التكلفة vs بسعر البيع)؟</li>
-        <li class="question-item">سجل القيد: سحب صاحب المشروع بضاعة للاستخدام المنزلي تكلفتها 200 دينار (التقييم بالتكلفة).</li>
-        <li class="question-item">ما هي القيود المحاسبية المتعلقة بالقروض (الحصول على القرض، وسداده)؟</li>
-    </ul>
+        <div class="controls">
+            <button type="button" class="btn" onclick="checkAnswers()">عرض النتيجة</button>
+        </div>
+    </form>
 
     <footer>
-        &copy; 2026 جميع الحقوق محفوظة | تصميم: <strong>من إعداد قيس جازي</strong>
+        &copy; 2026 جميع الحقوق محفوظة | تصميم المحتوى: <strong>قيس جازي</strong>
     </footer>
 </div>
+
+<script>
+    // قاعدة بيانات الأسئلة - 50 سؤال بناءً على المحتوى من ص 41-147
+    const questions = [
+        // الفصل الثاني: تحليل العمليات المالية
+        {
+            q: "العملية المالية هي العملية التي:",
+            options: ["تحدث في الإدارة العليا فقط", "تؤثر على مبلغ أو طبيعة أحد الحسابات ويمكن قياسها مادياً", "تتعلق بتعيين الموظفين", "لا تحتاج إلى مستندات تؤيدها"],
+            answer: 1
+        },
+        {
+            q: "أي الحسابات التالية يعتبر من الحسابات الحقيقية (الأصول)؟",
+            options: ["الرواتب", "الإيرادات", "السيارات", "المسحوبات الشخصية"],
+            answer: 2
+        },
+        {
+            q: "الحسابات الاسمية (Nominal Accounts) تشمل:",
+            options: ["الأصول والالتزامات", "المصاريف والإيرادات", "حقوق الملكية فقط", "الأصول الثابتة"],
+            answer: 1
+        },
+        {
+            q: "وفقاً لمعادلة الميزانية، فإن الأصول تساوي:",
+            options: ["الالتزامات - حقوق الملكية", "حقوق الملكية - الالتزامات", "الالتزامات + حقوق الملكية", "الإيرادات + المصاريف"],
+            answer: 2
+        },
+        {
+            q: "شراء سيارة نقداً يؤثر على معادلة الميزانية بـ:",
+            options: ["زيادة أصل ونقص أصل آخر", "زيادة أصل وزيادة التزام", "نقص أصل ونقص التزام", "زيادة التزام ونقص حقوق ملكية"],
+            answer: 0
+        },
+        {
+            q: "عند سداد دين مستحق على المشروع نقداً، فإن الأثر يكون:",
+            options: ["زيادة الأصول وزيادة الخصوم", "نقص الأصول ونقص الخصوم", "نقص الأصول وزيادة الخصوم", "لا تأثير على الميزانية"],
+            answer: 1
+        },
+        {
+            q: "طبيعة حسابات الأصول والمصاريف عند الزيادة تكون:",
+            options: ["دائنة", "مدينة", "مقفلة", "لا شيء مما ذكر"],
+            answer: 1
+        },
+        {
+            q: "طبيعة حسابات الالتزامات وحقوق الملكية والإيرادات عند الزيادة تكون:",
+            options: ["دائنة", "مدينة", "مدينة ودائنة معاً", "صفرية"],
+            answer: 0
+        },
+        {
+            q: "من الأمثلة على الأصول غير الملموسة (المعنوية):",
+            options: ["الأراضي", "البضاعة", "شهرة المحل", "النقدية"],
+            answer: 2
+        },
+        {
+            q: "دليل الحسابات (Chart of Accounts) يهدف إلى:",
+            options: ["زيادة أرباح الشركة", "ترقيم الحسابات لتسهيل إدخالها ومعالجتها بالحاسوب", "تقليل الضرائب", "الاستغناء عن المحاسبين"],
+            answer: 1
+        },
+        
+        // الفصل الثالث: تسجيل العمليات المالية
+        {
+            q: "أي مما يلي يعتبر مصدراً غير مباشر للقيود (أوراق ثبوتية)؟",
+            options: ["مستند القيد", "الفاتورة", "مستند القبض", "مستند الصرف"],
+            answer: 1
+        },
+        {
+            q: "الإشعار الذي يرسل للعميل لإعلامه بزيادة المطالبة المالية عليه هو:",
+            options: ["الإشعار الدائن", "الإشعار المدين", "الشيك", "الكمبيالة"],
+            answer: 1
+        },
+        {
+            q: "الورقة التجارية التي تتضمن أمراً بالدفع من الساحب إلى المسحوب عليه (البنك) هي:",
+            options: ["الكمبيالة", "السند لأمر", "الشيك", "الإشعار الدائن"],
+            answer: 2
+        },
+        {
+            q: "الخطوة الأولى في الدورة المحاسبية هي:",
+            options: ["الترحيل إلى دفتر الأستاذ", "إعداد ميزان المراجعة", "إعداد المستند وتحليل العملية المالية", "إعداد القوائم المالية"],
+            answer: 2
+        },
+        {
+            q: "نظام القيد المزدوج يعني أن لكل عملية مالية:",
+            options: ["طرف واحد فقط", "طرفان متساويان في القيمة أحدهما مدين والآخر دائن", "ثلاثة أطراف مختلفة", "طرف دائن فقط"],
+            answer: 1
+        },
+        {
+            q: "القيد الذي يتضمن طرفاً واحداً في المدين وطرفاً واحداً في الدائن يسمى:",
+            options: ["قيد مركب", "قيد بسيط", "قيد عكسي", "قيد إقفال"],
+            answer: 1
+        },
+        {
+            q: "القيد المركب من الجانب المدين يعني:",
+            options: ["وجود أكثر من حساب في الجانب الدائن", "وجود أكثر من حساب في الجانب المدين", "وجود حساب واحد في كلا الجانبين", "عدم توازن القيد"],
+            answer: 1
+        },
+        {
+            q: "عند شراء أثاث بمبلغ 5000 دينار ودفع نصف المبلغ نقداً والباقي بشيك، يكون القيد:",
+            options: ["بسيط", "مركب من الجانب المدين", "مركب من الجانب الدائن", "لا يسجل قيد"],
+            answer: 2
+        },
+        {
+            q: "يستخدم حساب 'الصندوق' للتعبير عن:",
+            options: ["النقدية في البنك", "النقدية في خزينة المشروع", "الشيكات الصادرة", "الكمبيالات"],
+            answer: 1
+        },
+        {
+            q: "عند بيع بضاعة نقداً، يكون الطرف الدائن في القيد هو:",
+            options: ["ح/ الصندوق", "ح/ المبيعات", "ح/ المشتريات", "ح/ المدينون"],
+            answer: 1
+        },
+
+        // الفصل الرابع: الدفاتر المحاسبية
+        {
+            q: "من الدفاتر الإلزامية التي نص عليها القانون الأردني:",
+            options: ["دفتر الأستاذ العام", "دفتر اليومية العام", "دفتر المسودة", "الدفاتر الإحصائية"],
+            answer: 1
+        },
+        {
+            q: "وفقاً للقانون، يجب الاحتفاظ بالدفاتر التجارية لمدة:",
+            options: ["5 سنوات", "10 سنوات", "15 سنة", "20 سنة"],
+            answer: 1
+        },
+        {
+            q: "دفتر الأستاذ العام يختص بـ:",
+            options: ["تسجيل العمليات يوماً بيوم", "تبويب وتصنيف العمليات بفتح صفحة لكل حساب", "حفظ صور الرسائل", "الجرد السنوي"],
+            answer: 1
+        },
+        {
+            q: "عملية نقل القيود من دفتر اليومية إلى دفتر الأستاذ تسمى:",
+            options: ["الترصيد", "التحليل", "الترحيل (Posting)", "الجرد"],
+            answer: 2
+        },
+        {
+            q: "إذا كان مجموع الجانب المدين لحساب ما أكبر من مجموع الجانب الدائن، فإن الرصيد يكون:",
+            options: ["رصيداً دائناً", "رصيداً مديناً", "حساباً مقفلاً", "صفراً"],
+            answer: 1
+        },
+        {
+            q: "الحساب 'المقفل' أو 'المرصد' يعني أن:",
+            options: ["مجموع الجانب المدين يساوي مجموع الجانب الدائن", "الرصيد مدين", "الرصيد دائن", "الحساب قد ألغي"],
+            answer: 0
+        },
+        {
+            q: "دفتر الأستاذ ذو الرصيد المتحرك يتميز بوجود:",
+            options: ["خانتين فقط", "ثلاث خانات", "أربعة أعمدة (حركة مدين/دائن ورصيد مدين/دائن)", "لا شيء مما ذكر"],
+            answer: 2
+        },
+        {
+            q: "في دفتر اليومية، تخصص الخانة الأولى لـ:",
+            options: ["المبالغ الدائنة (له)", "المبالغ المدينة (منه)", "رقم المستند", "رقم صفحة الأستاذ"],
+            answer: 1
+        },
+        {
+            q: "إعادة فتح الحساب تعني:",
+            options: ["شطب الحساب", "نقل الرصيد لبداية الفترة التالية", "إغلاق الحساب نهائياً", "تغيير اسم الحساب"],
+            answer: 1
+        },
+        {
+            q: "أي من الدفاتر التالية يعتبر دفتراً إحصائياً (غير إلزامي)؟",
+            options: ["دفتر اليومية العام", "دفتر صور الرسائل", "دفتر تحليل المبيعات", "دفتر الجرد والميزانية"],
+            answer: 2
+        },
+
+        // الفصل الخامس: العمليات التمويلية والرأسمالية
+        {
+            q: "عند بدء نشاط تجاري بإيداع نقدية في البنك، يكون الطرف المدين هو:",
+            options: ["ح/ رأس المال", "ح/ البنك", "ح/ الصندوق", "ح/ المسحوبات"],
+            answer: 1
+        },
+        {
+            q: "زيادة رأس المال بتقديم أصول عينية (مثل سيارة) يجعل حساب الأصول:",
+            options: ["مديناً", "دائناً", "لا يتأثر", "يظهر في حقوق الملكية"],
+            answer: 0
+        },
+        {
+            q: "تخفيض رأس المال نقداً يتطلب جعل حساب رأس المال:",
+            options: ["دائناً", "مديناً", "صفراً", "لا يسجل قيد"],
+            answer: 1
+        },
+        {
+            q: "المسحوبات الشخصية النقدية تؤثر على حقوق الملكية بـ:",
+            options: ["الزيادة", "النقصان", "لا تؤثر", "تثبت كأصل"],
+            answer: 1
+        },
+        {
+            q: "إذا سحب المالك بضاعة للاستخدام الشخصي وقيمت بسعر التكلفة، يكون الطرف الدائن:",
+            options: ["ح/ المبيعات", "ح/ المشتريات", "ح/ الصندوق", "ح/ المسحوبات"],
+            answer: 1
+        },
+        {
+            q: "إذا سحب المالك بضاعة للاستخدام الشخصي وقيمت بسعر البيع، يكون الطرف الدائن:",
+            options: ["ح/ المبيعات", "ح/ المشتريات", "ح/ رأس المال", "ح/ المسحوبات"],
+            answer: 0
+        },
+        {
+            q: "عند الحصول على قرض وإيداعه في البنك، يكون القيد:",
+            options: ["من ح/ القرض إلى ح/ البنك", "من ح/ البنك إلى ح/ القرض", "من ح/ البنك إلى ح/ رأس المال", "من ح/ المصاريف إلى ح/ البنك"],
+            answer: 1
+        },
+        {
+            q: "المصاريف الرأسمالية هي المصاريف التي:",
+            options: ["يستفاد منها لسنة واحدة فقط", "يستفاد منها لأكثر من سنة مالية", "تقلل من قيمة الأصول", "تعتبر خسارة فورية"],
+            answer: 1
+        },
+        {
+            q: "ترميم مبنى لزيادة عمره الإنتاجي يعتبر:",
+            options: ["مصروف إيرادي", "مصروف رأسمالي (يضاف لقيمة المبنى)", "خسارة", "مسحوبات شخصية"],
+            answer: 1
+        },
+        {
+            q: "مصروف صيانة السيارات الدورية (تغيير زيت) يعتبر:",
+            options: ["مصروف إيرادي", "مصروف رأسمالي", "أصل ثابت", "التزام"],
+            answer: 0
+        },
+
+        // أسئلة متنوعة وشاملة (تكملة للعدد 50)
+        {
+            q: "عند شراء أصل ثابت (آلة) يتم تسجيله بتكلفته التي تشمل:",
+            options: ["سعر الشراء فقط", "سعر الشراء + جميع المصاريف حتى تصبح جاهزة للاستخدام", "سعر السوق", "سعر البيع المتوقع"],
+            answer: 1
+        },
+        {
+            q: "مبدأ الاستحقاق يعني:",
+            options: ["تسجيل العمليات عند قبض النقد فقط", "تحميل الفترة بما يخصها من إيراد ومصروف سواء دفع/قبض أم لا", "تجاهل المصاريف غير المدفوعة", "تسجيل الإيرادات فقط"],
+            answer: 1
+        },
+        {
+            q: "المصروف المدفوع مقدماً يعالج في نهاية السنة عند الجرد كـ:",
+            options: ["مصروف يخص الفترة", "أصل (حق للمنشأة)", "التزام على المنشأة", "إيراد"],
+            answer: 1
+        },
+        {
+            q: "الإيراد المقبوض مقدماً يعتبر في الميزانية العمومية:",
+            options: ["أصلاً متداولاً", "التزاماً متداولاً", "حقوق ملكية", "مصروفاً"],
+            answer: 1
+        },
+        {
+            q: "المصاريف المستحقة الدفع (التي لم تدفع بعد) تظهر في الميزانية كـ:",
+            options: ["أصول", "التزامات", "حقوق ملكية", "إيرادات"],
+            answer: 1
+        },
+        {
+            q: "عند إقفال حسابات المصاريف في نهاية السنة، يتم جعلها:",
+            options: ["مدينة", "دائنة", "لا تقفل", "تضاف للأصول"],
+            answer: 1
+        },
+        {
+            q: "بضاعة آخر المدة تظهر في الميزانية العمومية ضمن:",
+            options: ["الأصول الثابتة", "الأصول المتداولة", "الخصوم المتداولة", "حقوق الملكية"],
+            answer: 1
+        },
+        {
+            q: "حساب 'مردودات المشتريات' يكون طبيعته في القيد:",
+            options: ["مادين", "دائن", "حسب الحالة", "لا يسجل"],
+            answer: 1
+        },
+        {
+            q: "الخصم الذي يمنح للعميل عند السداد المبكر يسمى:",
+            options: ["خصم تجاري", "خصم نقدي (خصم تعجيل الدفع)", "خصم كمية", "خصم ممنوح"],
+            answer: 1
+        },
+        {
+            q: "صافي المبيعات يساوي:",
+            options: ["إجمالي المبيعات + المردودات", "إجمالي المبيعات - (مردودات المبيعات + مسموحاتها + الخصم المسموح به)", "إجمالي المبيعات - تكلفة البضاعة المباعة", "المبيعات الآجلة فقط"],
+            answer: 1
+        }
+    ];
+
+    function renderQuestions() {
+        const container = document.getElementById('questions-container');
+        let html = '';
+        
+        questions.forEach((q, index) => {
+            html += `
+                <div class="question-card" id="q${index}">
+                    <div class="question-text">${index + 1}. ${q.q}</div>
+                    <ul class="options">
+                        ${q.options.map((opt, i) => `
+                            <li class="option-item">
+                                <input type="radio" name="q${index}" id="q${index}_opt${i}" value="${i}">
+                                <label class="option-label" for="q${index}_opt${i}">${opt}</label>
+                            </li>
+                        `).join('')}
+                    </ul>
+                    <div class="feedback" id="feedback${index}"></div>
+                </div>
+            `;
+        });
+        
+        container.innerHTML = html;
+    }
+
+    function checkAnswers() {
+        let score = 0;
+        let allAnswered = true;
+
+        questions.forEach((q, index) => {
+            const selected = document.querySelector(`input[name="q${index}"]:checked`);
+            const feedbackDiv = document.getElementById(`feedback${index}`);
+            
+            // إعادة تعيين الألوان
+            const labels = document.querySelectorAll(`input[name="q${index}"] + label`);
+            labels.forEach(l => {
+                l.style.backgroundColor = '';
+                l.style.borderColor = '';
+                l.style.color = '';
+            });
+
+            if (selected) {
+                const answer = parseInt(selected.value);
+                if (answer === q.answer) {
+                    score++;
+                    feedbackDiv.textContent = "إجابة صحيحة! أحسنت.";
+                    feedbackDiv.className = "feedback correct";
+                    feedbackDiv.style.display = "block";
+                } else {
+                    feedbackDiv.textContent = `إجابة خاطئة. الإجابة الصحيحة هي: ${q.options[q.answer]}`;
+                    feedbackDiv.className = "feedback incorrect";
+                    feedbackDiv.style.display = "block";
+                    
+                    // تمييز الإجابة الصحيحة
+                    const correctLabel = document.querySelector(`label[for="q${index}_opt${q.answer}"]`);
+                    correctLabel.style.backgroundColor = "#d4edda";
+                    correctLabel.style.borderColor = "#28a745";
+                    correctLabel.style.color = "#155724";
+                }
+            } else {
+                feedbackDiv.textContent = "الرجاء اختيار إجابة.";
+                feedbackDiv.className = "feedback incorrect";
+                feedbackDiv.style.display = "block";
+                allAnswered = false;
+            }
+        });
+
+        const resultBox = document.getElementById('score-display');
+        resultBox.style.display = 'block';
+        if (score >= 25) {
+            resultBox.innerHTML = `نتيجتك: <span style="color:green">${score} / 50</span> - ممتاز!`;
+            resultBox.style.borderColor = "green";
+        } else {
+            resultBox.innerHTML = `نتيجتك: <span style="color:red">${score} / 50</span> - حاول مرة أخرى.`;
+            resultBox.style.borderColor = "red";
+        }
+        
+        // التمرير للأعلى لرؤية النتيجة
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // تشغيل الدالة عند تحميل الصفحة
+    window.onload = renderQuestions;
+</script>
 
 </body>
 </html>
